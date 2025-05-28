@@ -6,5 +6,6 @@ import TheWelcome from '../components/TheWelcome.vue'
   <main>
     <TheWelcome />
     <div>Hello world! Feature one</div>
+    <div>Hello world! Feature two</div>
   </main>
 </template>
