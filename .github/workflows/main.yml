@@ -6,6 +6,7 @@ name: Commit Build
 #      - main
 
 on:
+  workflow_dispatch:
   pull_request:
     branches:
       - main
