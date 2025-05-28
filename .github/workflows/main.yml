@@ -6,6 +6,35 @@ on:
       - main
 
 jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: cd app-vue-one && npm ci
+
+      - name: Build
+        run: npm run build
+
+
+
+#      - name: Upload production-ready build files
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: production-files
+#          path: ./dist
+
+
   commit:
     runs-on: ubuntu-latest
 
@@ -24,8 +53,13 @@ jobs:
 
     - name: Commit changes
       run: |
-        git add example.txt
-        git commit -m "Automated commit from GitHub Actions"
+        git add ./app-vue-one/dist
+        git commit -m "Build"
+
+#    - name: Commit changes
+#      run: |
+#        git add example.txt
+#        git commit -m "Automated commit from GitHub Actions"
 
     - name: Push changes
       run: git push
