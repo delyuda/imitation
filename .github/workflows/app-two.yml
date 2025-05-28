@@ -18,10 +18,10 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: cd app-vue-one && npm ci
+        run: cd app-vue-two && npm ci
 
       - name: Build
-        run: cd app-vue-one && npm run build
+        run: cd app-vue-two && npm run build
 
       - name: Configure Git
         run: |
@@ -30,7 +30,7 @@ jobs:
 
       - name: Commit changes
         run: |
-          git add ./app-vue-one/dist/
+          git add ./app-vue-two/dist/
           git commit -m "Automatic build"
 
       - name: Push changes
