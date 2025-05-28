@@ -1,23 +1,12 @@
-name: Commit Build
-
-#on:
-#  push:
-#    branches:
-#      - main
+name: Commit Build app-2
 
 on:
   workflow_dispatch:
-  pull_request:
-    branches:
-      - main
-    types: ["labeled"]
 
 jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-
-    #if: github.event.pull_request.merged == true
 
     steps:
       - name: Checkout repo
