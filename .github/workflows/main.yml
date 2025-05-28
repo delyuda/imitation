@@ -26,7 +26,20 @@ jobs:
       - name: Build
         run: cd app-vue-one && npm run build
 
+      - name: Configure Git
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
 
+      - name: Commit changes
+        run: |
+          git add ./app-vue-one/dist/
+          git commit -m "Build"
+
+      - name: Push changes
+        run: git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 #      - name: Upload production-ready build files
 #        uses: actions/upload-artifact@v4
@@ -35,33 +48,33 @@ jobs:
 #          path: ./dist
 
 
-  commit:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-
-    - name: Make changes
-      run: |
-        echo "New content" >> example.txt
-
-    - name: Configure Git
-      run: |
-        git config user.name "GitHub Actions"
-        git config user.email "actions@github.com"
-
-    - name: Commit changes
-      run: |
-        git add ./app-vue-one/dist
-        git commit -m "Build"
-
+#  commit:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#    - name: Checkout repository
+#      uses: actions/checkout@v3
+#
+##    - name: Make changes
+##      run: |
+##        echo "New content" >> example.txt
+#
+#    - name: Configure Git
+#      run: |
+#        git config user.name "GitHub Actions"
+#        git config user.email "actions@github.com"
+#
 #    - name: Commit changes
 #      run: |
-#        git add example.txt
-#        git commit -m "Automated commit from GitHub Actions"
-
-    - name: Push changes
-      run: git push
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        git add ./app-vue-one/dist
+#        git commit -m "Build"
+#
+##    - name: Commit changes
+##      run: |
+##        git add example.txt
+##        git commit -m "Automated commit from GitHub Actions"
+#
+#    - name: Push changes
+#      run: git push
+#      env:
+#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
