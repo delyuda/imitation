@@ -10,11 +10,14 @@ on:
   pull_request:
     branches:
       - main
+    types: ["labeled"]
 
 jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+
+    if: ${{ github.event.pull_request.label == 'build'}}
 
     steps:
       - name: Checkout repo
@@ -39,7 +42,7 @@ jobs:
       - name: Commit changes
         run: |
           git add ./app-vue-one/dist/
-          git commit -m "Build"
+          git commit -m "Automatic build"
 
       - name: Push changes
         run: git push
